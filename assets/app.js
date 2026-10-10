@@ -6,11 +6,6 @@
 (function () {
   "use strict";
 
-  var MONTHS = ["янв.", "февр.", "марта", "апр.", "мая", "июня",
-                "июля", "авг.", "сент.", "окт.", "нояб.", "дек."];
-  var MONTHS_FULL = ["января", "февраля", "марта", "апреля", "мая", "июня",
-                     "июля", "августа", "сентября", "октября", "ноября", "декабря"];
-
   function el(tag, cls, text) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -25,17 +20,16 @@
     return many;
   }
 
-  /* «2026-10-09» → «9 окт.»; год — только если не текущий. */
+  /* Даты — числами, как на «Лучезарности» (владелец, 10.10.2026):
+     «2026-10-09» → «09.10», в подсказке и подвале — с годом. */
   function shortDate(iso) {
     var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || "");
-    if (!m) return "";
-    var s = +m[3] + " " + MONTHS[+m[2] - 1];
-    return +m[1] === new Date().getFullYear() ? s : s + " " + m[1];
+    return m ? m[3] + "." + m[2] : "";
   }
 
   function longDate(iso) {
     var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || "");
-    return m ? +m[3] + " " + MONTHS_FULL[+m[2] - 1] + " " + m[1] : "";
+    return m ? m[3] + "." + m[2] + "." + m[1] : "";
   }
 
   function files(n) {
@@ -71,6 +65,9 @@
       label.appendChild(el("span", "row-title", item.title));
       if (item.kind) label.appendChild(el("span", "row-sub", item.kind));
     }
+    /* Без подписи под названием строка однострочная — дата встаёт
+       вровень с названием, а не к верху. */
+    if (label.childNodes.length === 1) a.classList.add("row-one");
     a.appendChild(label);
 
     var day = shortDate(item.date);
