@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Сайт для класса, ссылка ходит по чату: искать его поисковикам незачем. -->
+<meta name="robots" content="noindex, nofollow">
+<!-- Тема одна, светлая, как у «Лучезарности»: «only light» — чтобы Chrome
+     на Android с тёмным режимом не перекрашивал страницу сам. -->
+<meta name="color-scheme" content="only light">
+<meta name="theme-color" content="#FFFFFF">
+<title>11-1</title>
+<!-- Значок вкладки — знак владельца, тот же, что на титулах документов. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50'/%3E%3Cg stroke='%23FDD17A' stroke-width='2.6'%3E%3Cline x1='50.0' y1='57.0' x2='50.0' y2='90.0'/%3E%3Cline x1='56.1' y1='53.5' x2='84.6' y2='70.0'/%3E%3Cline x1='57.0' y1='50.0' x2='80.0' y2='50.0'/%3E%3Cline x1='56.1' y1='46.5' x2='84.6' y2='30.0'/%3E%3Cline x1='53.5' y1='43.9' x2='65.0' y2='24.0'/%3E%3Cline x1='50.0' y1='43.0' x2='50.0' y2='10.0'/%3E%3Cline x1='46.5' y1='43.9' x2='35.0' y2='24.0'/%3E%3Cline x1='43.9' y1='46.5' x2='15.4' y2='30.0'/%3E%3Cline x1='43.0' y1='50.0' x2='20.0' y2='50.0'/%3E%3Cline x1='43.9' y1='53.5' x2='15.4' y2='70.0'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Cpolygon points='50.0,50.0 61.5,76.3 73.0,89.8 67.0,73.1'/%3E%3Cpolygon points='50.0,50.0 33.0,73.1 27.0,89.8 38.5,76.3'/%3E%3Ccircle cx='50' cy='50' r='4.5'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/golos-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css?v=1">
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <!-- Знак владельца — эталон manim/kanal/logo.svg в knowledge, как на
+         «Лучезарности». Встроен в разметку: приходит вместе со страницей. -->
+    <a class="brand" href="./" aria-label="11-1, на главную">
+      <svg class="brand-logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <circle cx="50" cy="50" r="50" fill="#000"/>
+        <g class="brand-rays" stroke="#FDD17A" stroke-width="2.6">
+          <line x1="50.0" y1="57.0" x2="50.0" y2="90.0"/>
+          <line x1="56.1" y1="53.5" x2="84.6" y2="70.0"/>
+          <line x1="57.0" y1="50.0" x2="80.0" y2="50.0"/>
+          <line x1="56.1" y1="46.5" x2="84.6" y2="30.0"/>
+          <line x1="53.5" y1="43.9" x2="65.0" y2="24.0"/>
+          <line x1="50.0" y1="43.0" x2="50.0" y2="10.0"/>
+          <line x1="46.5" y1="43.9" x2="35.0" y2="24.0"/>
+          <line x1="43.9" y1="46.5" x2="15.4" y2="30.0"/>
+          <line x1="43.0" y1="50.0" x2="20.0" y2="50.0"/>
+          <line x1="43.9" y1="53.5" x2="15.4" y2="70.0"/>
+        </g>
+        <polygon points="50.0,50.0 61.5,76.3 73.0,89.8 67.0,73.1" fill="#fff"/>
+        <polygon points="50.0,50.0 33.0,73.1 27.0,89.8 38.5,76.3" fill="#fff"/>
+        <circle cx="50" cy="50" r="4.5" fill="#fff"/>
+      </svg>
+    </a>
+    <div class="title">
+      <h1>11-1</h1>
+      <p class="title-sub">Работы и разборы для класса</p>
+    </div>
+  </header>
+
+  <!-- Каркас виден, пока скрипт ходит за индексом: пустая страница на это
+       время читается как зависание. Скрипт заменит его содержимым. -->
+  <main id="main">
+    <div class="skeleton" aria-hidden="true">
+      <span class="skel-head"></span>
+      <span class="skel-row"></span>
+      <span class="skel-row"></span>
+    </div>
+  </main>
+
+  <footer class="foot" id="foot"></footer>
+</div>
+<script defer src="assets/app.js?v=1"></script>
+</body>
+</html>
