@@ -449,6 +449,147 @@ body {
   background: #8A8494;
 }
 
+/* ── таблица результатов ───────────────────────────────── */
+
+/* Таблица свёрнута в строку того же вида, что строки файлов: точка
+   на месте миниатюры, название, дата, шеврон. Раскрытая — под строкой,
+   с теми же полями, что у строк. */
+.res-head {
+  list-style: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Дата — вровень с шевроном, а не у верха, как у строк файлов:
+   иначе они стоят лесенкой. */
+.res-head .row-aside { align-self: center; margin-top: 0; }
+
+.res-head::-webkit-details-marker { display: none; }
+.res-head::marker { content: ""; }
+
+.res[open] > .res-head .chev { transform: translateY(3px) rotate(225deg); }
+
+/* Поля — у крайних ячеек, а не у обёртки: подсветка строки под курсором
+   тогда во всю ширину, как у строк файлов, а фамилия и оценка стоят
+   вровень с миниатюрами и датами. */
+.res-body { padding: 4px 0 10px; }
+
+/* Раздельные рамки, а не слитые: при border-collapse: collapse ячейки
+   не скругляются, и подсветка строки выходила с прямыми углами. */
+.res-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.res-table th, .res-table td {
+  padding: 4px 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Номера задач и подписи столбцов — тихо, как даты. */
+.res-table thead th {
+  padding: 0 0 6px;
+  color: var(--ink-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Строки разделены тонкой чертой: глаз ведёт по своей строке
+   от фамилии до оценки и не съезжает на соседнюю. */
+.res-table thead th { border-bottom: 1px solid var(--line); }
+.res-table tbody tr + tr > * { border-top: 1px solid var(--line); }
+
+/* Подсветка под курсором — скруглённая, как у строк файлов. Черта над
+   подсвеченной строкой и под ней гаснет: из скругления она торчала бы
+   уголками. */
+.res-table tbody tr:hover > * { background: var(--quiet); }
+.res-table tbody tr:hover > :first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.res-table tbody tr:hover > :last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.res-table tbody tr:hover > *,
+.res-table tbody tr:hover + tr > * { border-top-color: transparent; }
+.res-table:has(tbody tr:first-child:hover) thead th { border-bottom-color: transparent; }
+
+.res-table th.res-name {
+  padding-left: 10px;
+  padding-right: 8px;
+  text-align: left;
+  font-size: 17px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.res-task { width: 36px; }
+
+/* Клетка балла: квадрат 30 с обводкой 2, как задача на «Бумаге». */
+.sc {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: var(--frame-sm);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--black);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Полный балл — цвет сделанного со шкалы продвижения. */
+.sc-full { background: #E29AB4; }
+
+/* Ноль — серый край, как у нерешённой задачи: брался, но не вышло. */
+.sc-zero { border-color: var(--line); color: var(--ink-muted); font-weight: 500; }
+
+/* Прочерк — не начинал: клетки нет, только тихая черта. */
+.sc-none { border-color: transparent; background: none; color: var(--ink-muted); font-weight: 400; }
+
+.res-sum { width: 42px; font-size: 17px; font-weight: 700; }
+
+.res-table .res-mark { width: 66px; padding-right: 10px; text-align: right; }
+
+.mark {
+  display: inline-block;
+  min-width: 42px;
+  padding: 1px 8px;
+  border: var(--frame-sm);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--black);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Пятёрка — жёлтая пилюля в той же обводке. Золото на чёрном было
+   слишком сильным (владелец, 11.10.2026). */
+.mark-top { background: var(--gold-logo); }
+
+.res-note {
+  margin: 10px 0 0;
+  padding: 0 10px;
+  color: var(--ink-muted);
+  font-size: 15px;
+}
+
+/* На телефоне в 375 таблица должна влезть без прокрутки вбок:
+   клетки и пилюли мельче, фамилия чуть мельче. */
+@media (max-width: 420px) {
+  .res-task { width: 27px; }
+  .sc { width: 24px; height: 24px; border-radius: 7px; font-size: 13.5px; }
+  .res-table th.res-name { font-size: 15px; padding-left: 6px; padding-right: 8px; }
+  .res-sum { width: 34px; padding-left: 3px; font-size: 15.5px; }
+  .res-table .res-mark { width: 48px; padding-right: 6px; }
+  .res-note { padding: 0 6px; }
+  .res-table thead th { font-size: 12.5px; }
+  .mark { min-width: 34px; padding: 1px 5px; font-size: 14px; }
+}
+
 /* ── пустое и каркас ───────────────────────────────────── */
 
 /* Пустой раздел — белая карточка с пунктиром: место есть, содержимого нет. */

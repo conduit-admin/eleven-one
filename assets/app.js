@@ -36,6 +36,18 @@
     return n + " " + plural(n, "файл", "файла", "файлов");
   }
 
+  /* Миниатюра — иллюстрация с обложки или, у таблицы результатов,
+     значок «±». Нет её — точка на том же месте. */
+  function thumbOf(item) {
+    if (!item.thumb) return el("span", "nothumb");
+    var img = el("img", "thumb");
+    img.src = item.thumb;
+    img.alt = "";
+    img.loading = "lazy";
+    img.decoding = "async";
+    return img;
+  }
+
   /* Строка ведёт прямо в PDF, в новой вкладке: промежуточная страница
      «о файле» стоила бы лишнего нажатия каждый раз. Под названием —
      категория, одно-два слова, как на «Лучезарности»: «Контрольная»,
@@ -47,16 +59,7 @@
     a.target = "_blank";
     a.rel = "noopener";
 
-    if (item.thumb) {
-      var img = el("img", "thumb");
-      img.src = item.thumb;
-      img.alt = "";
-      img.loading = "lazy";
-      img.decoding = "async";
-      a.appendChild(img);
-    } else {
-      a.appendChild(el("span", "nothumb"));
-    }
+    a.appendChild(thumbOf(item));
 
     var label = el("span", "row-label");
     if (inSet) {
@@ -86,6 +89,112 @@
       a.appendChild(aside);
     }
     return a;
+  }
+
+  /* ── таблица результатов ─────────────────────────────────
+
+     Не файл, а сама таблица: фамилия, баллы за задачи, сумма, оценка.
+     Источник — markdown в knowledge, скрипт выкладки кладёт её в индекс
+     полем table. Ячейки — тот же словарь, что у задач на «Бумаге»:
+     полный балл залит светлым розово-лиловым, как решённое, — цвет
+     сделанного со шкалы продвижения; частичный — белая клетка в чёрной
+     обводке; ноль — серый край, как у нерешённой; прочерк («не начинал»)
+     без клетки вовсе. Оценка — пилюля в обводке, пятёрка — жёлтая
+     (владелец, 11.10.2026: золото на чёрном было слишком сильным).
+
+     Свёрнута, пока не нажмут (владелец, 11.10.2026): в закрытом виде —
+     строка как у файла, с миниатюрой и шевроном. Миниатюра — значок
+     «±», один на все таблицы, её кладёт скрипт выкладки. Что
+     раскрыто, не запоминается — при каждом открытии сайта таблица
+     снова свёрнута. */
+  function results(item, inSet) {
+    var t = item.table;
+    var sec = el("details", "res");
+
+    var head = el("summary", "row res-head");
+    head.appendChild(thumbOf(item));
+    var label = el("span", "row-label");
+    label.appendChild(el("span", "row-title", inSet ? (item.kind || item.title) : item.title));
+    var who = t.rows.length + " " + plural(t.rows.length, "человек", "человека", "человек");
+    label.appendChild(el("span", "row-sub", !inSet && item.kind ? item.kind + " · " + who : who));
+    head.appendChild(label);
+    var day = shortDate(item.date);
+    if (day) {
+      var aside = el("span", "row-aside", day);
+      aside.title = "обновлено " + longDate(item.date);
+      head.appendChild(aside);
+    }
+    head.appendChild(el("span", "chev"));
+    sec.appendChild(head);
+
+    var marks = t.rows.some(function (r) { return r.mark; });
+
+    var table = el("table", "res-table");
+    var thead = el("thead");
+    var hr = el("tr");
+    var corner = el("th", "res-name");
+    corner.scope = "col";
+    corner.appendChild(el("span", "sr-only", "Фамилия"));
+    hr.appendChild(corner);
+    t.tasks.forEach(function (n) {
+      var th = el("th", "res-task", n);
+      th.scope = "col";
+      th.title = "задача " + n + (t.max ? ", до " + t.max : "");
+      hr.appendChild(th);
+    });
+    var sumHead = el("th", "res-sum", "Σ");
+    sumHead.scope = "col";
+    sumHead.title = "сумма";
+    hr.appendChild(sumHead);
+    if (marks) {
+      var markHead = el("th", "res-mark", "Оценка");
+      markHead.scope = "col";
+      hr.appendChild(markHead);
+    }
+    thead.appendChild(hr);
+    table.appendChild(thead);
+
+    var tbody = el("tbody");
+    t.rows.forEach(function (r) {
+      var tr = el("tr");
+      var name = el("th", "res-name", r.name);
+      name.scope = "row";
+      tr.appendChild(name);
+      r.scores.forEach(function (s) {
+        var td = el("td", "res-task");
+        if (s == null) {
+          var dash = el("span", "sc sc-none", "–");
+          dash.setAttribute("aria-hidden", "true");
+          td.appendChild(dash);
+          td.appendChild(el("span", "sr-only", "не начинал"));
+        } else {
+          var cls = s === 0 ? " sc-zero" : (t.max && s >= t.max ? " sc-full" : "");
+          td.appendChild(el("span", "sc" + cls, String(s)));
+        }
+        tr.appendChild(td);
+      });
+      tr.appendChild(el("td", "res-sum", String(r.sum)));
+      if (marks) {
+        var mark = el("td", "res-mark");
+        if (r.mark) {
+          mark.appendChild(el("span", "mark" + (/^5/.test(r.mark) ? " mark-top" : ""), r.mark));
+        }
+        tr.appendChild(mark);
+      }
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+
+    var body = el("div", "res-body");
+    body.appendChild(table);
+    (t.note || []).forEach(function (p) { body.appendChild(el("p", "res-note", p)); });
+    sec.appendChild(body);
+    return sec;
+  }
+
+  // файлов в записи — таблица не файл и в счёт не идёт
+  function fileCount(items) {
+    return items.filter(function (item) { return !item.table; }).length;
   }
 
   /* ── группа: работа и то, что к ней ──────────────────────
@@ -121,13 +230,15 @@
       name.appendChild(el("span", "fix-pill", "исправлено"));
     }
     head.appendChild(name);
-    var meta = [files(entry.items.length)];
+    var meta = [files(fileCount(entry.items))];
     if (entry.date) meta.push(shortDate(entry.date));
     head.appendChild(el("span", "set-meta", meta.join(" · ")));
     head.appendChild(el("span", "chev"));
     box.appendChild(head);
     var body = el("div", "set-body");
-    entry.items.forEach(function (item) { body.appendChild(row(item, true)); });
+    entry.items.forEach(function (item) {
+      body.appendChild(item.table ? results(item, true) : row(item, true));
+    });
     box.appendChild(body);
     box.addEventListener("toggle", function () { remember(entry.id, box.open); });
     return box;
@@ -140,7 +251,9 @@
     var sec = el("section", "block");
     var head = el("div", "block-head");
     head.appendChild(el("h2", null, group.title));
-    var count = group.items.reduce(function (n, e) { return n + (e.items ? e.items.length : 1); }, 0);
+    var count = group.items.reduce(function (n, e) {
+      return n + (e.items ? fileCount(e.items) : (e.table ? 0 : 1));
+    }, 0);
     head.appendChild(el("span", "block-count", String(count)));
     sec.appendChild(head);
     var stack = el("div", "stack");
@@ -149,6 +262,14 @@
       if (entry.items) {
         panel = null;
         stack.appendChild(set(entry));
+        return;
+      }
+      // таблица без своей работы — отдельным листом, а не строкой
+      if (entry.table) {
+        panel = null;
+        var sheet = el("div", "panel");
+        sheet.appendChild(results(entry, false));
+        stack.appendChild(sheet);
         return;
       }
       if (!panel) {
