@@ -279,10 +279,18 @@ body {
 .set-head::marker { content: ""; }
 .set-head:focus-visible { outline: 2px solid var(--black); outline-offset: -2px; }
 
-/* Заголовок группы — 19 жирным, как группы на «Бумаге». */
-.set-title {
+/* Название группы и под ним, если есть, пометка «исправлено». */
+.set-label {
   flex: 1 1 auto;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+/* Заголовок группы — 19 жирным, как группы на «Бумаге». */
+.set-title {
   color: var(--black);
   font-size: 19px;
   font-weight: 700;
@@ -365,6 +373,33 @@ body {
   font-weight: 400;
 }
 
+/* Исправление: белая пилюля в чёрной обводке 2 — так на «Бумаге»
+   выглядят все пометки, — рядом серым, что исправлено. Цвета
+   своего нет: строгий набор «Бумаги» тревожного цвета не держит,
+   и пометку выделяет рамка. */
+.row-fix {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  margin-top: 4px;
+  color: var(--ink-muted);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.fix-pill {
+  flex: none;
+  padding: 0 8px;
+  border: var(--frame-sm);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--black);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
 /* Дата — справа, тихо, цифры одной ширины. */
 .row-aside {
   flex: none;
@@ -405,7 +440,7 @@ body {
   background: #8A8494;
 }
 
-/* ── пустое, каркас, подвал ────────────────────────────── */
+/* ── пустое и каркас ───────────────────────────────────── */
 
 /* Пустой раздел — белая карточка с пунктиром: место есть, содержимого нет. */
 .empty {
@@ -426,13 +461,6 @@ body {
 
 .skel-head { height: 48px; }
 .skel-row { height: 72px; }
-
-.foot {
-  margin-top: 8px;
-  color: var(--ink-muted);
-  font-size: 13.5px;
-  text-align: center;
-}
 
 @media (max-width: 420px) {
   .row { gap: 10px; padding: 8px 6px; }

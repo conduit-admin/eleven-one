@@ -21,8 +21,11 @@
      плоская бирюза в рамке, круг-плашка с бликом и «Кристалл». -->
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<!-- Манифест — для Android: без него Chrome при «Добавить на главный
+     экран» берёт имя и иконку наугад. Устроен как у «Лучезарности». -->
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="preload" href="assets/fonts/golos-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=9">
+<link rel="stylesheet" href="assets/style.css?v=10">
 </head>
 <body>
 <div class="wrap">
@@ -80,9 +83,9 @@
       <span class="skel-row"></span>
     </div>
   </main>
-
-  <footer class="foot" id="foot"></footer>
+  <!-- Подвала с «Обновлено …» нет (владелец, 10.10.2026): дата и так
+       стоит у каждой строки. -->
 </div>
-<script defer src="assets/app.js?v=5"></script>
+<script defer src="assets/app.js?v=6"></script>
 </body>
 </html>

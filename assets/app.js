@@ -65,6 +65,15 @@
       label.appendChild(el("span", "row-title", item.title));
       if (item.kind) label.appendChild(el("span", "row-sub", item.kind));
     }
+    /* Исправление в уже выложенном — пилюлей и словами, что именно:
+       скачавший файл раньше должен узнать, что в его копии ошибка.
+       Висит, пока владелец не уберёт её из списка выкладки. */
+    if (item.fix) {
+      var fix = el("span", "row-fix");
+      fix.appendChild(el("span", "fix-pill", "исправлено"));
+      fix.appendChild(el("span", "fix-text", item.fix));
+      label.appendChild(fix);
+    }
     /* Без подписи под названием строка однострочная — дата встаёт
        вровень с названием, а не к верху. */
     if (label.childNodes.length === 1) a.classList.add("row-one");
@@ -103,7 +112,15 @@
     var box = el("details", "set");
     box.open = isOpen(entry.id);
     var head = el("summary", "set-head");
-    head.appendChild(el("span", "set-title", entry.title));
+    /* Пометка об исправлении видна и у закрытой группы — под названием,
+       а не справа: на телефоне справа места нет. Что исправлено —
+       в строке внутри. */
+    var name = el("span", "set-label");
+    name.appendChild(el("span", "set-title", entry.title));
+    if (entry.items.some(function (item) { return item.fix; })) {
+      name.appendChild(el("span", "fix-pill", "исправлено"));
+    }
+    head.appendChild(name);
     var meta = [files(entry.items.length)];
     if (entry.date) meta.push(shortDate(entry.date));
     head.appendChild(el("span", "set-meta", meta.join(" · ")));
@@ -152,9 +169,6 @@
       main.appendChild(el("p", "empty", "Пока здесь ничего нет."));
     }
     groups.forEach(function (g) { main.appendChild(block(g)); });
-    if (data.date) {
-      document.getElementById("foot").textContent = "Обновлено " + longDate(data.date);
-    }
   }
 
   function fail() {
