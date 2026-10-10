@@ -1,0 +1,25 @@
+{
+ "date": "2026-10-10",
+ "groups": [
+  {
+   "title": "Математика",
+   "items": [
+    {
+     "title": "Определённые интегралы: контрольная",
+     "sub": "контрольная, два варианта",
+     "pages": 2,
+     "date": "2026-10-10",
+     "href": "data/files/integraly-kr.pdf?v=0e46df465f"
+    },
+    {
+     "title": "Определённые интегралы: разбор контрольной",
+     "sub": "разбор обоих вариантов",
+     "pages": 7,
+     "date": "2026-10-09",
+     "href": "data/files/integraly-kr-razbor.pdf?v=bd477af41f",
+     "thumb": "data/thumbs/integraly-kr-razbor.png?v=bd477af41f"
+    }
+   ]
+  }
+ ]
+}
