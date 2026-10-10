@@ -105,6 +105,20 @@
     main.appendChild(el("p", "empty", "Список не загрузился. Обновите страницу."));
   }
 
+  /* Логотипы в шапке — кнопки: нажатие только запускает анимацию.
+     Класс снимается и ставится заново, чтобы она повторялась и при
+     нажатии подряд; click ловит и палец, и Enter с пробелом. */
+  document.querySelectorAll(".logo").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      btn.classList.remove("tap");
+      void btn.offsetWidth;
+      btn.classList.add("tap");
+    });
+    btn.addEventListener("animationend", function (e) {
+      if (e.target === btn.querySelector(".brand-logo")) btn.classList.remove("tap");
+    });
+  });
+
   /* no-cache — сверяться с сервером при каждом открытии: список меняется,
      а Pages держит файлы в кэше по десять минут. */
   fetch("data/index.json", { cache: "no-cache" })
