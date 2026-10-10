@@ -5,20 +5,25 @@
    "title": "Математика",
    "items": [
     {
-     "title": "Определённые интегралы: контрольная",
-     "sub": "два варианта по пять задач",
-     "pages": 3,
+     "id": "integraly-kr",
+     "title": "Определённые интегралы",
      "date": "2026-10-10",
-     "href": "data/files/integraly-kr.pdf?v=2fa0125ed7",
-     "thumb": "data/thumbs/integraly-kr.png?v=2fa0125ed7"
-    },
-    {
-     "title": "Определённые интегралы: разбор контрольной",
-     "sub": "оба варианта, решение к каждой задаче",
-     "pages": 7,
-     "date": "2026-10-09",
-     "href": "data/files/integraly-kr-razbor.pdf?v=bd477af41f",
-     "thumb": "data/thumbs/integraly-kr-razbor.png?v=bd477af41f"
+     "items": [
+      {
+       "title": "Определённые интегралы",
+       "kind": "Контрольная",
+       "date": "2026-10-10",
+       "href": "data/files/integraly-kr.pdf?v=2fa0125ed7",
+       "thumb": "data/thumbs/integraly-kr.png?v=2fa0125ed7"
+      },
+      {
+       "title": "Определённые интегралы: разбор контрольной",
+       "kind": "Разбор",
+       "date": "2026-10-09",
+       "href": "data/files/integraly-kr-razbor.pdf?v=bd477af41f",
+       "thumb": "data/thumbs/integraly-kr-razbor.png?v=bd477af41f"
+      }
+     ]
     }
    ]
   },
@@ -26,9 +31,8 @@
    "title": "Физика",
    "items": [
     {
-     "title": "Колебания: ответы к зачёту",
-     "sub": "ответы на все вопросы списка",
-     "pages": 26,
+     "title": "Зачёт по колебаниям",
+     "kind": "Ответы",
      "date": "2026-10-10",
      "href": "data/files/kolebaniya-zachet.pdf?v=51fdfc9e4d",
      "thumb": "data/thumbs/kolebaniya-zachet.png?v=51fdfc9e4d"
