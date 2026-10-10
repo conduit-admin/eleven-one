@@ -10,18 +10,18 @@
 <meta name="color-scheme" content="only light">
 <meta name="theme-color" content="#FFFFFF">
 <title>11-1</title>
-<!-- Логотип «Кристалл» (10.10.2026): плоский гранёный многоугольник,
-     без круга, градиентов и тени. Косая грань делит его на бирюзу
-     #93D2CB и чёрный; в бирюзе прорезаны две единицы, в чёрном — третья:
-     грань стоит на месте дефиса в «11-1». Прорези залиты белым, а не
-     вырезаны: сквозь дыры просвечивал бы муар. Иконка для домашнего
-     экрана — тот же рисунок на белом квадрате.
+<!-- Логотип «Петли» (10.10.2026): 11-1 прописью, одной непрерывной
+     линией — три петли «l», между второй и третьей связка поднимается
+     на середину высоты и идёт ровно: это дефис. Линия бирюзовая #93D2CB
+     в чёрной обводке, как всё на «Бумаге»; обводка — та же линия
+     толще, под бирюзовой. Иконка для домашнего экрана — тот же рисунок
+     на белом квадрате.
      До него в тот же день были «Медаль» на чёрном, Bonum на платине,
-     плоская бирюза в рамке и круг-плашка с бликом. -->
+     плоская бирюза в рамке, круг-плашка с бликом и «Кристалл». -->
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/golos-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=7">
+<link rel="stylesheet" href="assets/style.css?v=8">
 </head>
 <body>
 <div class="wrap">
@@ -30,18 +30,19 @@
          перезагружает (владелец, 10.10.2026), а только запускает
          анимацию. Рисунки встроены в разметку: приходят вместе со
          страницей и не мигают пустым местом. -->
-    <button class="logo kristall-btn" type="button" aria-label="11-1">
-      <!-- Тот же рисунок, что assets/logo.svg. -->
-      <svg class="brand-logo kristall" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-        <g transform="translate(-2 0)">
-          <path fill="#93D2CB" d="M46 4L63.7 9.6L55 94L36 96L10 70L12 26Z"/>
-          <path fill="#141118" d="M63.7 9.6L84 16L94 52L74 92L55 94Z"/>
-          <path fill="#FFFFFF" d="M25 80L32 80L38 22L31 22ZM39 82L46 82L52 20L45 20ZM66 82L73 82L79 20L72 20Z"/>
+    <button class="logo petli-btn" type="button" aria-label="11-1">
+      <!-- Тот же рисунок, что assets/logo.svg. pathLength="1" — длина
+           линии в долях: анимация прописывает её от 0 до 1, не зная
+           настоящей длины. -->
+      <svg class="brand-logo petli" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <g transform="translate(2.5 0)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path class="petli-line" pathLength="1" stroke="#141118" stroke-width="12" d="M9 80 C18 72 29 40 28 22 C27 7 12 7 14 24 C15 44 17 72 20 84 C22 92 28 90 31 80 C40 72 51 40 50 22 C49 7 34 7 36 24 C37 44 39 72 42 84 C44 92 50 90 52 76 C53 62 55 54 60 54 H65 C72 54 79 40 78 22 C77 7 62 7 64 24 C65 44 67 72 70 84 C72 92 80 92 86 82"/>
+          <path class="petli-line" pathLength="1" stroke="#93D2CB" stroke-width="7" d="M9 80 C18 72 29 40 28 22 C27 7 12 7 14 24 C15 44 17 72 20 84 C22 92 28 90 31 80 C40 72 51 40 50 22 C49 7 34 7 36 24 C37 44 39 72 42 84 C44 92 50 90 52 76 C53 62 55 54 60 54 H65 C72 54 79 40 78 22 C77 7 62 7 64 24 C65 44 67 72 70 84 C72 92 80 92 86 82"/>
         </g>
       </svg>
     </button>
     <!-- Надписи рядом с логотипами нет (владелец, 10.10.2026): 11-1 —
-         в самом логотипе, тремя прорезями. Заголовок остаётся для
+         в самом логотипе, тремя петлями. Заголовок остаётся для
          читалки экрана. -->
     <h1 class="sr-only">11-1 — работы и разборы для класса</h1>
     <!-- Знак «Лучезарности» — справа, как в шапке контрольной: он стоит
@@ -82,6 +83,6 @@
 
   <footer class="foot" id="foot"></footer>
 </div>
-<script defer src="assets/app.js?v=3"></script>
+<script defer src="assets/app.js?v=4"></script>
 </body>
 </html>

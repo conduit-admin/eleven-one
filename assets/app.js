@@ -38,9 +38,16 @@
     return m ? +m[3] + " " + MONTHS_FULL[+m[2] - 1] + " " + m[1] : "";
   }
 
+  function files(n) {
+    return n + " " + plural(n, "файл", "файла", "файлов");
+  }
+
   /* Строка ведёт прямо в PDF, в новой вкладке: промежуточная страница
-     «о файле» стоила бы лишнего нажатия каждый раз. */
-  function row(item) {
+     «о файле» стоила бы лишнего нажатия каждый раз. Под названием —
+     категория, одно-два слова, как на «Лучезарности»: «Контрольная»,
+     «Ответы». В группе название уже стоит в её шапке, и строка
+     подписана одной категорией. */
+  function row(item, inSet) {
     var a = el("a", "row");
     a.href = item.href;
     a.target = "_blank";
@@ -58,11 +65,12 @@
     }
 
     var label = el("span", "row-label");
-    label.appendChild(el("span", "row-title", item.title));
-    var sub = [];
-    if (item.sub) sub.push(item.sub);
-    if (item.pages) sub.push(item.pages + " " + plural(item.pages, "страница", "страницы", "страниц"));
-    if (sub.length) label.appendChild(el("span", "row-sub", sub.join(" · ")));
+    if (inSet) {
+      label.appendChild(el("span", "row-title", item.kind || item.title));
+    } else {
+      label.appendChild(el("span", "row-title", item.title));
+      if (item.kind) label.appendChild(el("span", "row-sub", item.kind));
+    }
     a.appendChild(label);
 
     var day = shortDate(item.date);
@@ -74,15 +82,68 @@
     return a;
   }
 
+  /* ── группа: работа и то, что к ней ──────────────────────
+
+     Как на «Лучезарности» уроки с разборами: родной <details>,
+     раскрывается без скрипта, клавиатурой и читалкой экрана. В закрытом
+     виде — карточка с названием работы, числом файлов и шевроном;
+     внутри строки на том же листе, без своей рамки: лист на листе
+     выглядел бы коробкой в коробке. Какие группы открыты, помнит браузер
+     читателя: это его удобство, а не данные, и в приватном окне всё
+     просто закрыто. */
+  function isOpen(id) {
+    try { return localStorage.getItem("open:" + id) === "1"; } catch (e) { return false; }
+  }
+
+  function remember(id, on) {
+    try {
+      if (on) localStorage.setItem("open:" + id, "1");
+      else localStorage.removeItem("open:" + id);
+    } catch (e) { /* хранилище недоступно — помнить просто нечем */ }
+  }
+
+  function set(entry) {
+    var box = el("details", "set");
+    box.open = isOpen(entry.id);
+    var head = el("summary", "set-head");
+    head.appendChild(el("span", "set-title", entry.title));
+    var meta = [files(entry.items.length)];
+    if (entry.date) meta.push(shortDate(entry.date));
+    head.appendChild(el("span", "set-meta", meta.join(" · ")));
+    head.appendChild(el("span", "chev"));
+    box.appendChild(head);
+    var body = el("div", "set-body");
+    entry.items.forEach(function (item) { body.appendChild(row(item, true)); });
+    box.appendChild(body);
+    box.addEventListener("toggle", function () { remember(entry.id, box.open); });
+    return box;
+  }
+
+  /* Раздел — плашка и под ней по порядку: одиночные строки подряд
+     собираются на один лист, каждая группа — своей карточкой. Число
+     на плашке — файлы, а не строки: группа из двух — это два документа. */
   function block(group) {
     var sec = el("section", "block");
     var head = el("div", "block-head");
     head.appendChild(el("h2", null, group.title));
-    head.appendChild(el("span", "block-count", String(group.items.length)));
+    var count = group.items.reduce(function (n, e) { return n + (e.items ? e.items.length : 1); }, 0);
+    head.appendChild(el("span", "block-count", String(count)));
     sec.appendChild(head);
-    var panel = el("div", "panel");
-    group.items.forEach(function (item) { panel.appendChild(row(item)); });
-    sec.appendChild(panel);
+    var stack = el("div", "stack");
+    var panel = null;
+    group.items.forEach(function (entry) {
+      if (entry.items) {
+        panel = null;
+        stack.appendChild(set(entry));
+        return;
+      }
+      if (!panel) {
+        panel = el("div", "panel");
+        stack.appendChild(panel);
+      }
+      panel.appendChild(row(entry));
+    });
+    sec.appendChild(stack);
     return sec;
   }
 

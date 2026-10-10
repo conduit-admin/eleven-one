@@ -162,17 +162,18 @@ body {
   100% { box-shadow: 0 0 0 2.5px var(--gold-logo); }
 }
 
-/* Нажатие на логотип 11-1 — кристалл поворачивают в руке: он
-   качается влево, вправо и встаёт на место за те же 0,7 секунды.
-   Ни блеска, ни свечения — рисунок плоский и остаётся плоским. */
-.kristall { transform-origin: 50% 50%; }
-.kristall-btn.tap .kristall { animation: tilt .7s cubic-bezier(.3, .1, .3, 1); }
+/* Нажатие на логотип 11-1 — линия прописывается заново, одним
+   росчерком слева направо, как пишут от руки. Штрих — вся линия
+   (pathLength="1" в разметке), сдвиг штриха с 1 до 0 открывает её
+   от начала к концу. Обводка и бирюза идут вместе: кончик пера
+   остаётся обведённым. Дольше лучей знака — 1,1 секунды: за 0,7
+   росчерк выглядел бы мельканием. */
+.petli-line { stroke-dasharray: 1 1; stroke-dashoffset: 0; }
+.petli-btn.tap .petli-line { animation: write 1.1s cubic-bezier(.45, .05, .35, 1); }
 
-@keyframes tilt {
-  0%   { transform: rotate(0deg); }
-  30%  { transform: rotate(-14deg); }
-  65%  { transform: rotate(6deg); }
-  100% { transform: rotate(0deg); }
+@keyframes write {
+  0%   { stroke-dashoffset: 1; }
+  100% { stroke-dashoffset: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -232,6 +233,10 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* Под плашкой — листы и карточки групп столбиком. Зазор 12, как между
+   обведёнными карточками на «Лучезарности»: при 8 рамки слипались. */
+.stack { display: grid; gap: 12px; }
+
 /* Лист со строками — белый, в толстой чёрной обводке. */
 .panel {
   display: grid;
@@ -240,6 +245,90 @@ body {
   background: var(--surface);
   border: var(--frame);
   border-radius: var(--radius);
+}
+
+/* ── группа: работа и то, что к ней ────────────────────── */
+
+/* Тот же белый лист в обводке, что у строк: в закрытом виде группа —
+   карточка с шевроном. Строки внутри — на этом же листе, отделены
+   от шапки тонкой чертой, а не рамкой. Так же устроены группы
+   на «Лучезарности». */
+.set {
+  background: var(--surface);
+  border: var(--frame);
+  border-radius: var(--radius);
+}
+
+/* Без переноса: на телефоне длинное название переносится внутри себя,
+   а число файлов и шеврон остаются справа на месте. С переносом
+   шеврон съезжал на отдельную строку под названием. */
+.set-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: var(--tap);
+  padding: 13px 16px;
+  border-radius: var(--radius);
+  list-style: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Родной треугольник прячем: шеврон справа рисуется сам и поворачивается. */
+.set-head::-webkit-details-marker { display: none; }
+.set-head::marker { content: ""; }
+.set-head:focus-visible { outline: 2px solid var(--black); outline-offset: -2px; }
+
+/* Заголовок группы — 19 жирным, как группы на «Бумаге». */
+.set-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--black);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.set-meta {
+  margin-left: auto;
+  color: var(--ink-muted);
+  font-size: 14.5px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Шеврон — уголок из двух рамок. Вниз — закрыто, вверх — открыто:
+   стрелка показывает, куда поедет содержимое. */
+.chev {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin: 0 3px 3px 2px;
+  border-right: 2px solid var(--ink-muted);
+  border-bottom: 2px solid var(--ink-muted);
+  transform: rotate(45deg);
+  transition: transform .16s ease;
+}
+
+.set[open] > .set-head .chev { transform: translateY(3px) rotate(225deg); }
+
+.set-body {
+  display: grid;
+  gap: 1px;
+  margin: 0 6px;
+  padding: 6px 0;
+  border-top: 1px solid var(--line);
+}
+
+/* Строка в группе — в одну строку, и дата стоит вровень с подписью,
+   а не прижата к верху, как у строк с категорией под названием. */
+.set-body .row-aside { align-self: center; margin-top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .chev { transition: none; }
 }
 
 /* ── строка документа ──────────────────────────────────── */
