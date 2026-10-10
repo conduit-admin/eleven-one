@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="only light">
+<meta name="theme-color" content="#FFFFFF">
+<title>11-1</title>
+<!-- Ссылка для чата класса: открыть сайт в Chrome, а не во встроенном
+     браузере мессенджера (владелец, 10.10.2026). Мессенджеры делают
+     кликабельными только https-ссылки, поэтому сам адрес intent://
+     в чат не годится — он живёт здесь, а в чат идёт эта страница.
+
+     Android — сразу intent:// в Chrome; нет Chrome — Android сам
+     уходит на сайт по browser_fallback_url. Встроенный браузер может
+     не пустить переход без нажатия, на этот случай кнопка. Остальные
+     (iPhone, компьютер) сразу уходят на сайт: открыть Chrome на iPhone
+     можно только его собственной схемой, и без Chrome Safari покажет
+     ошибку. -->
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/style.css?v=10">
+<style>
+  .go {
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+    padding: 18vh 0 0;
+    text-align: center;
+  }
+  .go-text { margin: 0; font-size: 19px; font-weight: 500; }
+  /* Кнопка «Бумаги» — белая в чёрной обводке. */
+  .go-btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 22px;
+    border: var(--frame);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--black);
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .go-btn:active { background: var(--quiet); }
+  .go-stay { color: var(--ink-muted); font-size: 15px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <main class="go">
+    <svg class="brand-logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <g transform="translate(2.5 0)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="#76C6BD" stroke-width="8" d="M9 80 C18 72 29 40 28 22 C27 7 12 7 14 24 C15 44 17 72 20 84 C22 92 28 90 31 80 C40 72 51 40 50 22 C49 7 34 7 36 24 C37 44 39 72 42 84 C44 92 50 90 52 76 C53 62 55 54 60 54 H65 C72 54 79 40 78 22 C77 7 62 7 64 24 C65 44 67 72 70 84 C72 92 80 92 86 82"/>
+      </g>
+    </svg>
+    <p class="go-text">Сайт класса откроется в Chrome</p>
+    <!-- Без скрипта кнопка просто ведёт на сайт. -->
+    <a class="go-btn" id="go" href="../">Открыть в Chrome</a>
+    <a class="go-stay" href="../">Открыть здесь</a>
+  </main>
+</div>
+<script>
+(function () {
+  "use strict";
+  var SITE = "https://conduit-admin.github.io/eleven-one/";
+  if (!/Android/i.test(navigator.userAgent)) {
+    location.replace(SITE);
+    return;
+  }
+  var intent = "intent://conduit-admin.github.io/eleven-one/#Intent;scheme=https;" +
+               "package=com.android.chrome;S.browser_fallback_url=" +
+               encodeURIComponent(SITE) + ";end";
+  document.getElementById("go").href = intent;
+  location.href = intent;
+})();
+</script>
+</body>
+</html>
