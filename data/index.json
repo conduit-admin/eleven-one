@@ -1,5 +1,5 @@
 {
- "date": "2026-10-10",
+ "date": "2026-10-11",
  "groups": [
   {
    "title": "Математика",
@@ -7,7 +7,7 @@
     {
      "id": "integraly-kr",
      "title": "Определённые интегралы",
-     "date": "2026-10-10",
+     "date": "2026-10-11",
      "items": [
       {
        "title": "Определённые интегралы",
@@ -22,6 +22,303 @@
        "date": "2026-10-10",
        "href": "data/files/integraly-kr-razbor.pdf?v=556dd8e0d2",
        "thumb": "data/thumbs/integraly-kr-razbor.png?v=556dd8e0d2"
+      },
+      {
+       "title": "Определённые интегралы: результаты",
+       "kind": "Результаты",
+       "date": "2026-10-11",
+       "table": {
+        "tasks": [
+         "1",
+         "2",
+         "3",
+         "4",
+         "5"
+        ],
+        "rows": [
+         {
+          "name": "Бабаин",
+          "scores": [
+           3,
+           5,
+           null,
+           3,
+           null
+          ],
+          "sum": 11,
+          "mark": "4−"
+         },
+         {
+          "name": "Бойко",
+          "scores": [
+           7,
+           0,
+           0,
+           0,
+           null
+          ],
+          "sum": 7,
+          "mark": "3"
+         },
+         {
+          "name": "Бондаренко",
+          "scores": [
+           5,
+           null,
+           1,
+           null,
+           null
+          ],
+          "sum": 6,
+          "mark": "3−"
+         },
+         {
+          "name": "Гогин",
+          "scores": [
+           7,
+           0,
+           0,
+           null,
+           null
+          ],
+          "sum": 7,
+          "mark": "3"
+         },
+         {
+          "name": "Гулев",
+          "scores": [
+           7,
+           3,
+           0,
+           null,
+           null
+          ],
+          "sum": 10,
+          "mark": "4−"
+         },
+         {
+          "name": "Дорожкина",
+          "scores": [
+           4,
+           3,
+           0,
+           null,
+           null
+          ],
+          "sum": 7,
+          "mark": "3"
+         },
+         {
+          "name": "Заречнюк",
+          "scores": [
+           4,
+           3,
+           null,
+           null,
+           null
+          ],
+          "sum": 7,
+          "mark": "3"
+         },
+         {
+          "name": "Каронов",
+          "scores": [
+           7,
+           7,
+           6,
+           1,
+           null
+          ],
+          "sum": 21,
+          "mark": "5"
+         },
+         {
+          "name": "Карьев",
+          "scores": [
+           7,
+           3,
+           0,
+           0,
+           null
+          ],
+          "sum": 10,
+          "mark": "4−"
+         },
+         {
+          "name": "Ковалёв",
+          "scores": [
+           5,
+           1,
+           null,
+           null,
+           null
+          ],
+          "sum": 6,
+          "mark": "3−"
+         },
+         {
+          "name": "Костылев",
+          "scores": [
+           7,
+           3,
+           0,
+           null,
+           null
+          ],
+          "sum": 10,
+          "mark": "4−"
+         },
+         {
+          "name": "Ларионова",
+          "scores": [
+           7,
+           6,
+           1,
+           0,
+           null
+          ],
+          "sum": 14,
+          "mark": "4"
+         },
+         {
+          "name": "Махров",
+          "scores": [
+           5,
+           2,
+           0,
+           3,
+           null
+          ],
+          "sum": 10,
+          "mark": "4−"
+         },
+         {
+          "name": "Новосёлов",
+          "scores": [
+           7,
+           3,
+           null,
+           null,
+           null
+          ],
+          "sum": 10,
+          "mark": "4−"
+         },
+         {
+          "name": "Осипова",
+          "scores": [
+           4,
+           2,
+           null,
+           0,
+           null
+          ],
+          "sum": 6,
+          "mark": "3−"
+         },
+         {
+          "name": "Павлов",
+          "scores": [
+           7,
+           7,
+           5,
+           7,
+           5
+          ],
+          "sum": 31,
+          "mark": "5"
+         },
+         {
+          "name": "Пономарева",
+          "scores": [
+           7,
+           0,
+           1,
+           null,
+           0
+          ],
+          "sum": 8,
+          "mark": "3"
+         },
+         {
+          "name": "Попова",
+          "scores": [
+           3,
+           3,
+           1,
+           null,
+           null
+          ],
+          "sum": 7,
+          "mark": "3"
+         },
+         {
+          "name": "Рудакова",
+          "scores": [
+           7,
+           3,
+           0,
+           null,
+           1
+          ],
+          "sum": 11,
+          "mark": "4−"
+         },
+         {
+          "name": "Сахаров",
+          "scores": [
+           7,
+           6,
+           0,
+           null,
+           null
+          ],
+          "sum": 13,
+          "mark": "4"
+         },
+         {
+          "name": "Целиков",
+          "scores": [
+           7,
+           6,
+           0,
+           null,
+           0
+          ],
+          "sum": 13,
+          "mark": "4"
+         },
+         {
+          "name": "Шипилов",
+          "scores": [
+           7,
+           null,
+           0,
+           0,
+           null
+          ],
+          "sum": 7,
+          "mark": "3"
+         },
+         {
+          "name": "Ширтанова",
+          "scores": [
+           4,
+           5,
+           2,
+           null,
+           null
+          ],
+          "sum": 11,
+          "mark": "4−"
+         }
+        ],
+        "max": 7,
+        "note": [
+         "Проверка была крайне лояльной"
+        ]
+       },
+       "thumb": "data/thumbs/integraly-kr-rezultaty.svg?v=890e902cfc"
       }
      ]
     }
