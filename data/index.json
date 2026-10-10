@@ -21,6 +21,19 @@
      "thumb": "data/thumbs/integraly-kr-razbor.png?v=bd477af41f"
     }
    ]
+  },
+  {
+   "title": "Физика",
+   "items": [
+    {
+     "title": "Колебания: ответы к зачёту",
+     "sub": "ответы на все вопросы списка",
+     "pages": 26,
+     "date": "2026-10-10",
+     "href": "data/files/kolebaniya-zachet.pdf?v=51fdfc9e4d",
+     "thumb": "data/thumbs/kolebaniya-zachet.png?v=51fdfc9e4d"
+    }
+   ]
   }
  ]
 }
