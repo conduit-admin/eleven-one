@@ -111,14 +111,14 @@ body {
 
 /* Логотипы — кнопки без собственного вида: нажатие ничего не открывает
    и не перезагружает, только запускает анимацию (класс tap ставит
-   app.js). Цель касания — сам круг. */
+   app.js). Цель касания — сам рисунок. */
 .logo {
   display: block;
   flex: none;
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 50%;
+  border-radius: 10px;
   background: none;
   line-height: 0;
   cursor: pointer;
@@ -132,19 +132,15 @@ body {
   display: block;
   width: 64px;
   height: 64px;
-  border-radius: 50%;
 }
 
-/* Логотип сайта устроен как алмазная плашка «Бумаги» — грани, блик,
-   пятно и искра нарисованы в самом SVG, — и тень у него та же,
-   бирюзовая. Рамки нет: металл и камень не обводятся. */
-.medal {
-  box-shadow: 0 2px 6px rgba(10, 80, 76, 0.16), 0 22px 44px -26px rgba(10, 80, 76, 0.55);
-}
+/* Логотип сайта плоский: ни тени, ни рамки, ни круга — форма
+   задана самим рисунком. Круглая кнопка только у знака. */
+.znak-btn { border-radius: 50%; }
 
 /* Жёлтое кольцо цвета лучей — только у знака и только на сайте,
    у самого знака его нет: так же, как на «Лучезарности». */
-.znak { box-shadow: 0 0 0 2.5px var(--gold-logo); }
+.znak { border-radius: 50%; box-shadow: 0 0 0 2.5px var(--gold-logo); }
 
 /* Нажатие на знак — та же вспышка, что на «Лучезарности»: лучи разом
    вытягиваются от центра, толще и светлее, кольцо на миг толще,
@@ -166,23 +162,17 @@ body {
   100% { box-shadow: 0 0 0 2.5px var(--gold-logo); }
 }
 
-/* Нажатие на логотип 11-1 — блик: полоса света наискось пробегает
-   по кругу слева направо, как по огранённому камню, а искра в углу
-   вспыхивает и поворачивается на четверть оборота — у четырёхлучевой
-   это то же положение. Полоса в покое стоит за краем круга и не видна. */
-.medal-spark { transform-box: fill-box; transform-origin: center; }
-.medal-btn.tap .medal-glint { animation: glint .7s cubic-bezier(.3, .1, .3, 1); }
-.medal-btn.tap .medal-spark { animation: spark .7s cubic-bezier(.2, .8, .3, 1); }
+/* Нажатие на логотип 11-1 — кристалл поворачивают в руке: он
+   качается влево, вправо и встаёт на место за те же 0,7 секунды.
+   Ни блеска, ни свечения — рисунок плоский и остаётся плоским. */
+.kristall { transform-origin: 50% 50%; }
+.kristall-btn.tap .kristall { animation: tilt .7s cubic-bezier(.3, .1, .3, 1); }
 
-@keyframes glint {
-  from { transform: translateX(0); }
-  to   { transform: translateX(190px); }
-}
-
-@keyframes spark {
-  0%   { transform: scale(1) rotate(0deg); }
-  35%  { transform: scale(1.8) rotate(45deg); }
-  100% { transform: scale(1) rotate(90deg); }
+@keyframes tilt {
+  0%   { transform: rotate(0deg); }
+  30%  { transform: rotate(-14deg); }
+  65%  { transform: rotate(6deg); }
+  100% { transform: rotate(0deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
