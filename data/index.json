@@ -11,17 +11,17 @@
      "items": [
       {
        "title": "Определённые интегралы",
-       "kind": "Контрольная",
+       "kind": "Работа",
        "date": "2026-10-10",
-       "href": "data/files/integraly-kr.pdf?v=2fa0125ed7",
-       "thumb": "data/thumbs/integraly-kr.png?v=2fa0125ed7"
+       "href": "data/files/integraly-kr.pdf?v=5fe9d00c35",
+       "thumb": "data/thumbs/integraly-kr.png?v=5fe9d00c35"
       },
       {
-       "title": "Определённые интегралы: разбор контрольной",
+       "title": "Определённые интегралы: разбор работы",
        "kind": "Разбор",
        "date": "2026-10-10",
-       "href": "data/files/integraly-kr-razbor.pdf?v=bd477af41f",
-       "thumb": "data/thumbs/integraly-kr-razbor.png?v=bd477af41f"
+       "href": "data/files/integraly-kr-razbor.pdf?v=17f3db3848",
+       "thumb": "data/thumbs/integraly-kr-razbor.png?v=17f3db3848"
       }
      ]
     }
