@@ -114,8 +114,9 @@
       void btn.offsetWidth;
       btn.classList.add("tap");
     });
-    btn.addEventListener("animationend", function (e) {
-      if (e.target === btn.querySelector(".brand-logo")) btn.classList.remove("tap");
+    /* Анимации внутри кнопки одной длины: первая кончилась — кончились все. */
+    btn.addEventListener("animationend", function () {
+      btn.classList.remove("tap");
     });
   });
 
