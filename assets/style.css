@@ -89,11 +89,24 @@ body {
 
 /* ── шапка ─────────────────────────────────────────────── */
 
+/* Шапка — два знака и ничего больше: слева логотип 11-1, справа знак
+   «Лучезарности», как в шапке контрольной. Надписи рядом нет. */
 .topbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
-  padding: 24px 0 22px;
+  padding: 24px 2.5px 22px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .brand {
@@ -114,14 +127,7 @@ body {
   box-shadow: 0 0 0 2.5px var(--gold-logo);
 }
 
-.title {
-  min-width: 0;
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-}
+.znak { flex: none; }
 
 /* ── разделы ───────────────────────────────────────────── */
 
@@ -290,7 +296,6 @@ body {
 }
 
 @media (max-width: 420px) {
-  .title { font-size: 21px; }
   .row { gap: 10px; padding: 8px 6px; }
   .thumb, .nothumb { width: 48px; height: 48px; }
 }
