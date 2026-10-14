@@ -441,6 +441,18 @@ body {
 
 .nothumb { display: grid; place-items: center; }
 
+/* Значок сайта — на месте миниатюры и той же ширины, чтобы названия
+   стояли по одной линии; сам рисунок 46, как в «Сайтах» на
+   «Лучезарности». Без рамки — у значков своя. */
+.row-logo {
+  display: block;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  padding: 5px;
+  object-fit: contain;
+}
+
 .nothumb::before {
   content: "";
   width: 8px;
@@ -614,5 +626,6 @@ body {
 
 @media (max-width: 420px) {
   .row { gap: 10px; padding: 8px 6px; }
-  .thumb, .nothumb { width: 48px; height: 48px; }
+  .thumb, .nothumb, .row-logo { width: 48px; height: 48px; }
+  .row-logo { padding: 3px; }
 }

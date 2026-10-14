@@ -349,6 +349,19 @@
      "thumb": "data/thumbs/kompleksnyy-metod.png?v=a1ded3b071"
     }
    ]
+  },
+  {
+   "title": "Сайты",
+   "items": [
+    {
+     "title": "Кондуит кружка",
+     "kind": "conduit-admin/conduit-city-26",
+     "date": "",
+     "href": "https://conduit-admin.github.io/conduit-city-26/",
+     "site": true,
+     "logo": "data/logos/conduit-city-26.svg?v=8089f9f647"
+    }
+   ]
   }
  ]
 }
