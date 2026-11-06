@@ -1,5 +1,5 @@
 {
- "date": "2026-10-15",
+ "date": "2026-11-06",
  "groups": [
   {
    "title": "Математика",
@@ -321,6 +321,13 @@
        "thumb": "data/thumbs/integraly-kr-rezultaty.svg?v=2061ee593d"
       }
      ]
+    },
+    {
+     "title": "Двойные и повторные пределы",
+     "kind": "Конспект",
+     "date": "2026-11-06",
+     "href": "data/files/dvoynye-predely.pdf?v=733073d3af",
+     "thumb": "data/thumbs/dvoynye-predely.png?v=733073d3af"
     }
    ]
   },
