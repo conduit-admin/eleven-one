@@ -1,5 +1,5 @@
 {
- "date": "2026-11-06",
+ "date": "2026-11-12",
  "groups": [
   {
    "title": "Математика",
@@ -328,6 +328,13 @@
      "date": "2026-11-06",
      "href": "data/files/dvoynye-predely.pdf?v=245d3d1687",
      "thumb": "data/thumbs/dvoynye-predely.png?v=245d3d1687"
+    },
+    {
+     "title": "Частные производные",
+     "kind": "Конспект",
+     "date": "2026-11-12",
+     "href": "data/files/chastnye-proizvodnye.pdf?v=f37ec9bcdc",
+     "thumb": "data/thumbs/chastnye-proizvodnye.png?v=f37ec9bcdc"
     }
    ]
   },
